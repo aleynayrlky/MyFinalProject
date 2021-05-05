@@ -12,16 +12,30 @@ namespace ConsoleUI
             //ProductTest();
             //CategoryTest();
             //ProductDtoTest();
+            ProductManager productManager = new ProductManager(new EfProductDal());
+            var result = productManager.GetProductDetails();
+            if (result.Success==true)
+            {
+                foreach (var product in result.Data)
+                {
+                    Console.WriteLine(product.ProductName + "/" + product.CategoryName);
+                }
+            }
+            else
+            {
+                Console.WriteLine(result.Message);
+            }
+           
         }
 
-        private static void ProductDtoTest()
-        {
-            ProductManager productManager = new ProductManager(new EfProductDal());
-            foreach (var product in productManager.GetProductDetails())
-            {
-                Console.WriteLine(product.ProductName + "/" + product.CategoryName);
-            }
-        }
+        //private static void ProductDtoTest()
+        //{
+        //    ProductManager productManager = new ProductManager(new EfProductDal());
+        //    foreach (var product in productManager.GetProductDetails())
+        //    {
+        //        Console.WriteLine(product.ProductName + "/" + product.CategoryName);
+        //    }
+        //}
 
         private static void CategoryTest()
         {
@@ -32,13 +46,13 @@ namespace ConsoleUI
             }
         }
 
-        private static void ProductTest()
-        {
-            ProductManager productManager = new ProductManager(new EfProductDal());
-            foreach (var product in productManager.GetByUnitPrice(40, 100))
-            {
-                Console.WriteLine(product.ProductName);
-            }
-        }
+        //private static void ProductTest()
+        //{
+        //    ProductManager productManager = new ProductManager(new EfProductDal());
+        //    foreach (var product in productManager.GetByUnitPrice(40, 100))
+        //    {
+        //        Console.WriteLine(product.ProductName);
+        //    }
+        //}
     }
 }
